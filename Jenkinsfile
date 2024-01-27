@@ -1,8 +1,8 @@
 pipeline {
     environment{
-        IMAGE_NAME = "webapp"
+        IMAGE_NAME = "login-page"
         IMAGE_TAG = "1.0.0"
-        CONTAINER_NAME = "webapp"
+        CONTAINER_NAME = "login-page"
         DOCKER_HUB_CREDENTIALS_ID = "dockerhub_jlkatobo"
         SSH_CREDENTIALS_ID = "aws_key"
         SERVER_USER = "ubuntu"
@@ -24,9 +24,9 @@ pipeline {
                 script{
                     sh """
                         docker rm -f ${CONTAINER_NAME} || true
-                        docker run --name ${CONTAINER_NAME} -d -p 80:80 ${IMAGE_NAME}:${IMAGE_TAG}
+                        docker run --name ${CONTAINER_NAME} -d -p 1500:80 ${IMAGE_NAME}:${IMAGE_TAG}
                         sleep 10
-                        curl -X GET http://localhost:80 | grep -i 'dimension'
+                        curl -X GET http://localhost:1500 | grep -i 'dimension'
                     """
                 }
             }
@@ -54,7 +54,7 @@ pipeline {
                         sh """ 
                             ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP docker pull jlkatobo/${IMAGE_NAME}:${IMAGE_TAG}
                             ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP docker container rm -f $CONTAINER_NAME || true 
-                            ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP docker run --name $CONTAINER_NAME -d -p 8080:80 jlkatobo/${IMAGE_NAME}:${IMAGE_TAG} 
+                            ssh -i $SSH_PRIVATE_KEY -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP docker run --name $CONTAINER_NAME -d -p 1500:80 jlkatobo/${IMAGE_NAME}:${IMAGE_TAG} 
                         """
                     }
                 }
