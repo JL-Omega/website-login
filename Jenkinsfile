@@ -26,7 +26,7 @@ pipeline {
                         docker rm -f ${CONTAINER_NAME} || true
                         docker run --name ${CONTAINER_NAME} -d -p 1500:80 ${IMAGE_NAME}:${IMAGE_TAG}
                         sleep 10
-                        curl -X GET http://localhost:1500 | grep -i 'dimension'
+                        curl -X GET http://localhost:1500 | grep -i 'SIGN IN'
                     """
                 }
             }
