@@ -1,8 +1,8 @@
 # Utilisez une image Node.js
-FROM node:slim
+FROM node:14
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
-
+#COPY backend/package*.json ./
 
 # Nettoyer le cache npm
 RUN npm cache clean --force
