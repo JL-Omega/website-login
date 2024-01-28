@@ -1,5 +1,5 @@
 # Utilisez une image Node.js
-FROM node:14
+FROM node:16
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 #COPY backend/package*.json ./
