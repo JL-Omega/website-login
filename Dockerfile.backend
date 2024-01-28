@@ -1,8 +1,8 @@
 # Utilisez une image Node.js
-FROM node:12.18.1
+FROM node:slim
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
-COPY backend/package*.json ./
+
 
 # Nettoyer le cache npm
 RUN npm cache clean --force
@@ -17,5 +17,5 @@ COPY backend/ .
 EXPOSE 3000
 
 # Commande pour démarrer l'application avec npm start
-CMD ["npm", "start"]
+CMD node app.js
 
