@@ -4,6 +4,9 @@ FROM node:14
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY backend/package*.json ./
 
+# Nettoyer le cache npm
+RUN npm cache clean --force
+
 # Installer les dépendances
 RUN npm install
 
