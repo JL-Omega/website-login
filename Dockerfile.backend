@@ -1,11 +1,11 @@
 # Utilisez une image Node.js
-FROM noooooytrde:16-alpine:0000
-
-# Copier les fichiers package.json et package-lock.json pour installer les dépendances
-COPY backend/package*.json ./
+FROM node:15
 
 # Nettoyer le cache npm
 RUN npm cache clean --force
+
+# Copier les fichiers package.json et package-lock.json pour installer les dépendances
+COPY backend/package*.json ./
 
 # Installer les dépendances
 RUN npm install

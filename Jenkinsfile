@@ -12,6 +12,7 @@ pipeline {
             steps{
                 script{
                     sh "docker rm -f \$(docker ps -aq) || true"
+                    sh "docker builder prune -f"
                     sh "docker compose up -d"
                 }
             }
