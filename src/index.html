@@ -8,7 +8,7 @@
     <!-- Title of the page -->
     <title>Your Page Title</title>
 
-     <!-- Link to the CSS file for styling -->
+    <!-- Link to the CSS file for styling -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,23 +17,23 @@
 <div class="container right-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form action="#" class="form" id="form1">
+        <form action="#" class="form" id="form1" onsubmit="signup(event)">
             <h2 class="form__title">Sign Up</h2>
-            <input type="text" placeholder="User: Chéché Mbuangi" class="input" />
-            <input type="email" placeholder="Email: mbuangi_cheronne@yahoo.fr" class="input" />
-            <input type="password" placeholder="Password: ***********" class="input" />
-            <button class="btn">Sign Up</button>
+            <input type="text" placeholder="User: Chéché Mbuangi" class="input" id="signupUser" />
+            <input type="email" placeholder="Email: mbuangi_cheronne@yahoo.fr" class="input" id="signupEmail" />
+            <input type="password" placeholder="Password: ***********" class="input" id="signupPassword" />
+            <button class="btn" type="submit">Sign Up</button>
         </form>
     </div>
 
     <!-- Sign In -->
     <div class="container__form container--signin">
-        <form action="#" class="form" id="form2">
+        <form action="#" class="form" id="form2" onsubmit="signin(event)">
             <h2 class="form__title">Sign In</h2>
-            <input type="email" placeholder="Email: mbuangi_cheronne@yahoo.fr" class="input" />
-            <input type="password" placeholder="Password: ****************" class="input" />
+            <input type="email" placeholder="Email: mbuangi_cheronne@yahoo.fr" class="input" id="signinEmail" />
+            <input type="password" placeholder="Password: ****************" class="input" id="signinPassword" />
             <a href="#" class="link">Forgot your password?</a>
-            <button class="btn">Sign In</button>
+            <button class="btn" type="submit">Sign In</button>
         </form>
     </div>
 
@@ -49,7 +49,48 @@
         </div>
     </div>
 </div>
+
 <!-- Link to the JavaScript file for scripting -->
 <script src="script.js"></script>
+<script>
+function signup(event) {
+    event.preventDefault();
+
+    const user = document.getElementById('signupUser').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://backend:3000/signup', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(JSON.parse(xhr.responseText));
+        }
+    };
+    xhr.send(JSON.stringify({ user, email, password }));
+}
+
+function signin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('signinEmail').value;
+    const password = document.getElementById('signinPassword').value;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://backend:3000/signin', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log('User signed in successfully');
+            } else {
+                console.log('Invalid credentials');
+            }
+        }
+    };
+    xhr.send(JSON.stringify({ email, password }));
+}
+</script>
 </body>
 </html>

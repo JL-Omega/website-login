@@ -1,0 +1,18 @@
+# Utilisez une image Node.js
+FROM node:14
+
+# Copier les fichiers package.json et package-lock.json pour installer les dépendances
+COPY backend/package*.json ./
+
+# Installer les dépendances
+RUN npm install
+
+# Copier le reste des fichiers de l'application
+COPY backend/ .
+
+# Exposer le port sur lequel l'application s'exécute
+EXPOSE 3000
+
+# Commande pour démarrer l'application avec npm start
+CMD ["npm", "start"]
+
