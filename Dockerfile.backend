@@ -2,7 +2,7 @@
 FROM node:16-alpine
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
-#COPY backend/package*.json ./
+COPY backend/package*.json ./
 
 # Nettoyer le cache npm
 RUN npm cache clean --force
@@ -17,5 +17,5 @@ COPY backend/ .
 EXPOSE 3000
 
 # Commande pour démarrer l'application avec npm start
-CMD ["node", "dist/app.js"]
+CMD ["node", "app.js"]
 
