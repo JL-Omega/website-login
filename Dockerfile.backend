@@ -1,5 +1,5 @@
 # Utilisez une image Node.js
-FROM noooooytrde:16-alpine:000
+FROM noooooytrde:16-alpine:0000
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 COPY backend/package*.json ./
