@@ -66,6 +66,10 @@ function signup(event) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(JSON.parse(xhr.responseText));
+            // Réinitialiser les champs du formulaire après un envoi réussi
+            document.getElementById('signupUser').value = '';
+            document.getElementById('signupEmail').value = '';
+            document.getElementById('signupPassword').value = '';
         }
     };
     xhr.send(JSON.stringify({ user, email, password }));
@@ -84,6 +88,9 @@ function signin(event) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 console.log('User signed in successfully');
+                // Réinitialiser les champs du formulaire après un envoi réussi
+                document.getElementById('signinEmail').value = '';
+                document.getElementById('signinPassword').value = '';
             } else {
                 console.log('Invalid credentials');
             }
