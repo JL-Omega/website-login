@@ -1,5 +1,5 @@
 # Utilisez une image Node.js
-FROM node:16
+FROM node:lts-alpine
 
 # Copier les fichiers package.json et package-lock.json pour installer les dépendances
 #COPY backend/package*.json ./
@@ -17,5 +17,5 @@ COPY backend/ .
 EXPOSE 3000
 
 # Commande pour démarrer l'application avec npm start
-CMD node app.js
+CMD ["node", "dist/app.js"]
 
