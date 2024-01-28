@@ -11,7 +11,7 @@ pipeline {
             agent any
             steps{
                 script{
-                    sh "docker rm -f $(docker ps -aq)"
+                    sh "docker rm -f \$(docker ps -aq)"
                     sh "docker compose up -d"
                 }
             }
